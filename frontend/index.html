@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="http://www.lamma.rete.toscana.it/sites/all/themes/lamma/favicon.ico" type="image/vnd.microsoft.icon" />
+    <title>Selezione Aree Allerta - Consorzio LaMMA</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-table/dist/bootstrap-table.css">
+    <link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.8.0/dist/combined/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.8.0/dist/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20140204/json2.min.js"></script>
+    <![endif]-->
+    <script src='src/moment.min.js'></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class=" col-sm-2" style="text-align:center;">
+                    <a href="http://www.lamma.rete.toscana.it/" target="_blank" class="img-thumbnail">
+                    <img class="img-fluid" src="assets/img/loghi/logo.png" alt="Consorzio LaMMA" width="160">
+                </a>
+                </div>
+                <div class="col-sm-10" style="text-align:center;">
+                    <h2 id="bollettino-title">Selezione Aree Allerta</h2>
+                    <p id="bollettino-title-giorno" class="lead bg-success text-success"></p>
+                </div>
+            </div>
+        </div>
+        <div id="toolbar">
+            <!-- button id="remove" class="btn btn-danger" disabled>
+            <i class="glyphicon glyphicon-remove"></i> Delete
+        </button -->
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <label id="label-tipo-impatto">Tabella IMPATTO</label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">TOTALE</th>
+                            <th scope="col" bgcolor="#99CC00">VERDE</th>
+                            <th scope="col" bgcolor="#FFFF00">GIALLO</th>
+                            <th scope="col" bgcolor="#FFA500">ARANCIO</th>
+                            <th scope="col" bgcolor="#FF0000">ROSSO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" id="totale"></th>
+                            <td id="verde"></td>
+                            <td id="gialla"></td>
+                            <td id="arancio"></td>
+                            <td id="rossa"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <form>
+                    <div class="form-group">
+                        <label for="codiceAllerta">Codice Allerta:</label>
+                        <select id="codiceAllerta" class="form-control selectpicker" multiple width: 'auto' data-actions-box="true">
+                            <option value="1" selected="selected">Idrogeologico</option>
+                            <option value="2">Idraulico</option>
+                            <option value="3">Vento</option>
+                            <option value="4">Mareggiate</option>
+                            <option value="5">Neve</option>
+                            <option value="6">Ghiaccio</option>
+                            <option value="7">Temporali</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="areaAllerta">Area Allerta:</label>
+                        <select class="form-control selectpicker" id="areaAllerta" data-live-search="true">
+                            <option value="A1">Arno-Casentino</option>
+                            <option value="A6">Arno-Costa</option>id="gialla"
+                            <option value="A3">Arno-Firenze</option>
+                            <option value="A2">Arno-Valdarno Sup.</option>
+                            <option value="B">Bisenzio e Ombrone Pt</option>
+                            <option value="E1">Etruria</option>
+                            <option value="E2">Etruria-Costa Nord</option>
+                            <option value="E3">Etruria-Costa Sud</option>
+                            <option value="F1">Fiora e Albegna</option>
+                            <option value="F2">Fiora e Albegna-Costa e Giglio</option>
+                            <option value="I">Isole</option>
+                            <option value="L">Lunigiana</option>
+                            <option value="M">Mugello-Val di Sieve</option>
+                            <option value="O1">Ombrone Gr-Alto</option>
+                            <option value="O3">Ombrone Gr-Costa</option>
+                            <option value="O2">Ombrone Gr-Medio</option>
+                            <option value="R1">Reno</option>
+                            <option value="R2">Romagna-Toscana</option>
+                            <option value="S3">Serchio-Costa</option>
+                            <option value="S1">Serchio-Garfagnana-Lima</option>
+                            <option value="S2">Serchio-Lucca</option>
+                            <option value="A4">Valdarno Inf.</option>
+                            <option value="A5">Valdelsa-Valdera</option>
+                            <option value="C">Valdichiana</option>
+                            <option value="T">Valtiberina</option>
+                            <option value="V">Versilia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="impatto">Tipo impatto:</label>
+                        <div class="radio-inline">
+                            <label class="form-check-label" for="inlineRadio1"><input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio24" value="24" checked>
+                                24 ore
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label class="form-check-label" for="inlineRadio2"><input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio48" value="48">
+                                48 ore
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="impatto">Impatto:</label>
+                        <select class="form-control selectpicker" multiple width: 'auto' data-actions-box="true" id="impatto">
+                            <option value="1">VERDE</option>
+                            <option value="2" selected="selected">GIALLO</option>
+                            <option value="3">ARANCIO</option>
+                            <option value="4">ROSSO</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataInizio">Data inizio:</label>
+                        <input id="startDate" />
+                        <label for="dataInizio">Data fine:</label>
+                        <input id="endDate" />
+                    </div>
+                </form>
+            </div>
+            <div class=" col-sm-9">
+                <table
+                    id="table"
+                    data-toolbar="#toolbar"
+                    data-search="true"
+                    data-show-refresh="true"
+                    data-show-toggle="true"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-minimum-count-columns="2"
+                    data-show-pagination-switch="true"
+                    data-pagination="true"
+                    data-id-field="id"
+                    data-page-list="[10, 25, 50, 100, ALL]"
+                    data-show-footer="false"
+                    data-side-pagination="client"
+                    data-response-handler="responseHandler"
+                    data-url="http://geoportale.lamma.rete.toscana.it/cgi-bin/ait_app/areeallertaselect.py"
+                    data-method="get"
+                    data-escape="true"
+                    data-ajax-options="optionsAjax"
+                    data-query-params="queryParams"
+                    data-cache="true">
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src='src/aree_allerta.js'></script>
+</body>
+
+</html>
